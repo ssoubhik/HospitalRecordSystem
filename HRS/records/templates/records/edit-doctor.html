@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Doctor</title>
+</head>
+<body>
+<h1>Edit a Doctor</h1>
+<form action="edit-view" method="GET">
+    {% csrf_token %}
+    {% for doctor in doctors %}
+    <input type="checkbox" id="{{doctor.doctor_id}}" name="doc_to_edit" value="{{doctor.doctor_id}}">
+    <label for="{{doctor.doctor_id}}"> {{doctor.doctor_name}} ({{doctor.specialization}})</label><br>
+    {% endfor %}
+<input type="submit" value="Edit"/>
+</form>
+</body>
+</html>

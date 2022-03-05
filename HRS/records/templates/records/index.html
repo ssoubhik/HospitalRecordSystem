@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Record System</title>
+</head>
+<body>
+<h1>show a list of doctors here!</h1>
+<ul>
+{% for doctor in doctors %}
+    <li>{{doctor.doctor_name}} ({{doctor.specialization}})</li>
+{% endfor %}
+</ul>
+</body>
+</html>
