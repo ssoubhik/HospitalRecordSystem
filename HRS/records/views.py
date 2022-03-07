@@ -36,7 +36,6 @@ def add_new_doctor(request):
 
 # delete doctor view
 def delete_doctor(request):
-
     # create an array of Doctor
     doctors = Doctor.objects.all()
     param = {'doctors': doctors}
@@ -57,40 +56,65 @@ def delete_doctor(request):
         return render(request, 'records/delete-doctor.html', param)
 
 
-# edit doctor list view
+# global variable declaration
+doctor_id = 0
+
+
+# edit doctor view
 def edit_doctor(request):
     # create an array of Doctor
     doctors = Doctor.objects.all()
     param = {'doctors': doctors}
 
-    # edit doctor template
-    return render(request, 'records/edit-doctor.html', param)
-
-
-# edit doctor view
-def edit_view(request):
-    # get the doctor object to edit
-    edit_doc = Doctor.objects.get(doctor_id=request.GET.get('doc_to_edit'))
-
-    param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
-
-    # perform on click done button
     if request.method == 'POST':
-        # check if doctor name has been edited or not
-        if request.POST.get('new_doctor_name'):
+        if request.POST.get('doc_to_edit'):
+            global doctor_id
+            doctor_id = request.POST.get('doc_to_edit')
+            # get the doctor object to edit
+            print("doctor_id:", doctor_id)
+            edit_doc = Doctor.objects.get(doctor_id=doctor_id)
+            edit_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
+
+            # edit doctor template
+            return render(request, 'records/edit-view.html', edit_param)
+
+        # check if both doctor name and specialization has been edited or not
+        if request.POST.get('new_doctor_name') and request.POST.get('new_specialization'):
+            edit_doc = Doctor.objects.get(doctor_id=doctor_id)
             edit_doc.doctor_name = request.POST.get('new_doctor_name')
+            edit_doc.specialization = request.POST.get('new_specialization')
+            edit_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
+
+            # save changes
+            edit_doc.save()
+
+            # edit doctor template
+            return render(request, 'records/edit-view.html', edit_param)
+
+        # check if doctor name has been edited or not
+        elif request.POST.get('new_doctor_name'):
+            edit_doc = Doctor.objects.get(doctor_id=doctor_id)
+            edit_doc.doctor_name = request.POST.get('new_doctor_name')
+            edit_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
+
+            # save changes
+            edit_doc.save()
+
+            # edit doctor template
+            return render(request, 'records/edit-view.html', edit_param)
 
         # check if specialization has been edited or not
-        if request.POST.get('new_specialization'):
+        elif request.POST.get('new_doctor_name'):
+            edit_doc = Doctor.objects.get(doctor_id=doctor_id)
             edit_doc.specialization = request.POST.get('new_specialization')
+            edit_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
 
-        # save changes
-        edit_doc.save()
+            # save changes
+            edit_doc.save()
 
-        edited_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
+            # edit doctor template
+            return render(request, 'records/edit-view.html', edit_param)
 
-        # edit view template
-        return render(request, 'records/edit-view.html', edited_param)
     else:
-        # edit view template
-        return render(request, 'records/edit-view.html', param)
+        # edit doctor template
+        return render(request, 'records/edit-doctor.html', param)

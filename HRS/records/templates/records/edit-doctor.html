@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Edit a Doctor</h1>
-<form action="edit-view" method="GET">
+<form action="" method="POST">
     {% csrf_token %}
     {% for doctor in doctors %}
     <input type="checkbox" id="{{doctor.doctor_id}}" name="doc_to_edit" value="{{doctor.doctor_id}}">
