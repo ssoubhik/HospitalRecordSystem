@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Records</title>
+</head>
+<body>
+<h1>show a list of doctors here!</h1>
+<ul>
+{% for doctor in doctors %}
+    <li>{{doctor.doctor_name}} ({{doctor.specialization}})</li>
+{% endfor %}
+</ul>
+<a href="add-doctor">Add Doctor</a><br>
+<a href="edit-doctor">Edit Doctor</a><br>
+<a href="delete-doctor">Delete Doctor</a>
+</body>
+</html>

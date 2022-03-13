@@ -1,14 +1,20 @@
 from django.shortcuts import render
 from .models import Doctor
+from django.views.generic import TemplateView
 
 
 # doctors list view
 def index(request):
+    return render(request, 'records/index.html')
+
+
+# doctors list view
+def doctor_records(request):
     # creating an array of Doctor
     doctors = Doctor.objects.all()
 
     param = {'doctors': doctors}
-    return render(request, 'records/index.html', param)
+    return render(request, 'records/doctor-records.html', param)
 
 
 # add doctor view
@@ -71,7 +77,6 @@ def edit_doctor(request):
             global doctor_id
             doctor_id = request.POST.get('doc_to_edit')
             # get the doctor object to edit
-            print("doctor_id:", doctor_id)
             edit_doc = Doctor.objects.get(doctor_id=doctor_id)
             edit_param = {'doctor_name': edit_doc.doctor_name, 'specialization': edit_doc.specialization}
 
@@ -118,3 +123,23 @@ def edit_doctor(request):
     else:
         # edit doctor template
         return render(request, 'records/edit-doctor.html', param)
+
+
+# patient records view
+class PatientRecordsView(TemplateView):
+    template_name = 'records/patient-records.html'
+
+
+# add patient view
+class AddPatientView(TemplateView):
+    template_name = 'records/add-patient.html'
+
+
+# edit patient view
+class EditPatientView(TemplateView):
+    template_name = 'records/edit-patient.html'
+
+
+# delete patient view
+class DeletePatientView(TemplateView):
+    template_name = 'records/delete-patient.html'
