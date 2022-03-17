@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Doctor
-from django.views.generic import TemplateView
+from .models import Doctor, Patient
+from django.views.generic import TemplateView, ListView
 
 
 # doctors list view
@@ -126,7 +126,8 @@ def edit_doctor(request):
 
 
 # patient records view
-class PatientRecordsView(TemplateView):
+class PatientRecordsView(ListView):
+    model = Patient
     template_name = 'records/patient-records.html'
 
 

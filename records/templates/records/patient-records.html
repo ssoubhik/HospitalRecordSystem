@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>show a list of patients here!</h1>
+<ul>
+    {% for patient in object_list %}
+    <li>{{patient.patient_name}}</li>
+    {% endfor %}
+</ul>
 <a href="add-patient">Add Patient</a><br>
 <a href="edit-patient">Edit Patient</a><br>
 <a href="delete-patient">Delete Patient</a>
