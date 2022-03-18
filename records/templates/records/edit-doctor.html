@@ -6,13 +6,10 @@
 </head>
 <body>
 <h1>Edit a Doctor</h1>
-<form action="" method="POST">
+<form method="post">
     {% csrf_token %}
-    {% for doctor in doctors %}
-    <input type="checkbox" id="{{doctor.doctor_id}}" name="doc_to_edit" value="{{doctor.doctor_id}}">
-    <label for="{{doctor.doctor_id}}"> {{doctor.doctor_name}} ({{doctor.specialization}})</label><br>
-    {% endfor %}
-<input type="submit" value="Edit Doctor"/>
+    {{ form.as_p }}
+    <input type="submit" value="Save">
 </form>
 </body>
 </html>

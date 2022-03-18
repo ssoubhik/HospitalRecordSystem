@@ -7,12 +7,10 @@
 <body>
 <h1>show a list of doctors here!</h1>
 <ul>
-{% for doctor in doctors %}
-    <li>{{doctor.doctor_name}} ({{doctor.specialization}})</li>
-{% endfor %}
+    {% for doctor in object_list %}
+    <li>{{doctor.doctor_name}} (spcl: {{doctor.specialization}}) <a href="edit-doctor/{{doctor.doctor_id}}">Edit</a> <a href="delete-doctor/{{doctor.doctor_id}}">Delete</a></li>
+    {% endfor %}
 </ul>
-<a href="add-doctor">Add Doctor</a><br>
-<a href="edit-doctor">Edit Doctor</a><br>
-<a href="delete-doctor">Delete Doctor</a>
+<a href="add-doctor">Add Doctor</a>
 </body>
 </html>

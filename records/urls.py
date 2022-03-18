@@ -1,13 +1,14 @@
 from django.urls import path
-from . import views
-from .views import PatientRecordsView, AddPatientView, EditPatientView, DeletePatientView
+
+from .views import HomepageView, DoctorRecordsView, AddDoctorView, DeleteDoctorView, EditDoctorView, PatientRecordsView, \
+    AddPatientView, EditPatientView, DeletePatientView
 
 urlpatterns = [
-    path('', views.index, name="HRSHome"),
-    path('doctor-records', views.doctor_records, name="DoctorRecords"),
-    path('add-doctor', views.add_new_doctor, name="AddNewDoctor"),
-    path('delete-doctor', views.delete_doctor, name="DeleteDoctor"),
-    path('edit-doctor', views.edit_doctor, name="EditDoctor"),
+    path('', HomepageView.as_view(), name="HRSHome"),
+    path('doctor-records', DoctorRecordsView.as_view(), name="DoctorRecords"),
+    path('add-doctor', AddDoctorView.as_view(), name="AddNewDoctor"),
+    path('delete-doctor/<int:pk>', DeleteDoctorView.as_view(), name="DeleteDoctor"),
+    path('edit-doctor/<int:pk>', EditDoctorView.as_view(), name="EditDoctor"),
     path('patient-records', PatientRecordsView.as_view(), name="PatientRecords"),
     path('add-patient', AddPatientView.as_view(), name="AddPatient"),
     path('edit-patient/<int:pk>', EditPatientView.as_view(), name="EditPatient"),
