@@ -8,11 +8,9 @@
 <h1>show a list of patients here!</h1>
 <ul>
     {% for patient in object_list %}
-    <li>{{patient.patient_name}}</li>
+    <li>{{patient.patient_name}} <a href="edit-patient/{{patient.patient_id}}">Edit</a> <a href="delete-patient/{{patient.patient_id}}">Delete</a></li>
     {% endfor %}
 </ul>
 <a href="add-patient">Add Patient</a><br>
-<a href="edit-patient">Edit Patient</a><br>
-<a href="delete-patient">Delete Patient</a>
 </body>
 </html>

@@ -19,7 +19,7 @@ class Patient(models.Model):
     patient_name = models.CharField(max_length=25)
     patient_dob = models.DateField()
     patient_address = models.CharField(max_length=100)
-    patient_date_admitted = models.DateTimeField()
+    patient_date_admitted = models.DateField()
     patient_doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):

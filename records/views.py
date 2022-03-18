@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+
 from .models import Doctor, Patient
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
 
 # doctors list view
@@ -132,15 +134,23 @@ class PatientRecordsView(ListView):
 
 
 # add patient view
-class AddPatientView(TemplateView):
+class AddPatientView(CreateView):
+    model = Patient
+    fields = '__all__'
+    success_url = reverse_lazy("PatientRecords")
     template_name = 'records/add-patient.html'
 
 
 # edit patient view
-class EditPatientView(TemplateView):
+class EditPatientView(UpdateView):
+    model = Patient
+    fields = '__all__'
+    success_url = reverse_lazy("PatientRecords")
     template_name = 'records/edit-patient.html'
 
 
 # delete patient view
-class DeletePatientView(TemplateView):
+class DeletePatientView(DeleteView):
+    model = Patient
+    success_url = reverse_lazy("PatientRecords")
     template_name = 'records/delete-patient.html'

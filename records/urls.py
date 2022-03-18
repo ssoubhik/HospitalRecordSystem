@@ -10,6 +10,6 @@ urlpatterns = [
     path('edit-doctor', views.edit_doctor, name="EditDoctor"),
     path('patient-records', PatientRecordsView.as_view(), name="PatientRecords"),
     path('add-patient', AddPatientView.as_view(), name="AddPatient"),
-    path('edit-patient', EditPatientView.as_view(), name="EditPatient"),
-    path('delete-patient', DeletePatientView.as_view(), name="DeletePatient"),
+    path('edit-patient/<int:pk>', EditPatientView.as_view(), name="EditPatient"),
+    path('delete-patient/<int:pk>', DeletePatientView.as_view(), name="DeletePatient"),
 ]
